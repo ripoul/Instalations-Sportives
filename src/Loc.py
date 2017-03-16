@@ -2,35 +2,32 @@ import csv
 import http.client
 from urllib.parse import urlencode
 import json
+from urllib import request
 
 
-API_KEY ="AIzaSyDVhh9kdSNtwZGklnwbpQLOW3mB8qNnPno"
+API_KEY ="ntWIq3E6VJyaoTFIRPSCa39KQJZwDgGo"
 
-
-
-installations_data = csv.reader(open("data/csv/installationsMod.csv", "r"))
-
-
-
-API_KEY = "YOUR_API_KEY"
 
 try:
     location = input('Entrez une adresse : ')
 
     urlParams = {'location': location, 'key': API_KEY, 'inFormat':'kvp', 'outFormat':'json'}
-    url = "/geocoding/v1/address?" + urlencode(urlParams)
+    url = "http://www.mapquestapi.com/geocoding/v1/address?" + urlencode(urlParams)
 
-    conn = http.client.HTTPConnection("www.mapquestapi.com")
-    conn.request("GET", url)
+    print(url)
 
-    res = conn.getresponse()
-    print(res.status, res.reason)
+    proxy_host = 'proxyetu.iut-nantes.univ-nantes.prive:3128'
+    req = request.Request(url)
+    req.set_proxy(proxy_host, 'http')
 
-    data = res.read()
+    response = request.urlopen(req)
+
+    data = response.read().decode('utf8')
+
     jsonData = json.loads(data)
     # FIXME le print n'est pas très secure...
-    print(jsonData['results'][0]['locations'][0]['latLng'])
+    print(jsonData['results'][0]['locations'][0]['latLng']['lat'])
+    print("test")
+    print(jsonData['results'][0]['locations'][0]['latLng']['lng'])
 except Exception as err:
     print("Unexpected error: {0}".format(err))
-finally:
-    conn.close()
