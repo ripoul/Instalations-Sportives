@@ -6,26 +6,19 @@ import sys
 con = sqlite3.connect('test.db')
 cur = con.cursor()
 
-# Create table installation
+# Create table
 try:
 	cur.execute('''CREATE TABLE installation
-             (numero INTEGER PRIMARY KEY, nom TEXT, adresse TEXT, code_postal TEXT, ville TEXT)''') #latitude real, longitude real
-except sqlite3.Error:
-	print("		Erreur: CREATE TABLE installation\n")
-
-# Create table activite
-try:
+             (numero INTEGER PRIMARY KEY, nom TEXT, adresse TEXT, code_postal TEXT, ville TEXT,  latitude REAL, longitude REAL)''')
 	cur.execute('''CREATE TABLE activite
              (numero INTEGER PRIMARY KEY, nom TEXT)''')
-except sqlite3.Error:
-	print("		Erreur: CREATE TABLE activite\n")
-
-# Create table equipement
-try:
 	cur.execute('''CREATE TABLE equipement
              (numero INTEGER PRIMARY KEY, nom TEXT, numero_installation INTEGER)''')
+	cur.execute('''CREATE TABLE equipement_activite
+             (numero_equipement INTEGER , numero_activite INTEGER)''')
 except sqlite3.Error:
-	print("		Erreur: CREATE TABLE equipement\n")
+	print("		Erreur à la création des tables\n")
+
 
 
 
@@ -35,18 +28,22 @@ sql = ('INSERT INTO installation (numero, nom, adresse, code_postal, ville) VALU
 # Insert each row of data from installation.csv
 installations_data = csv.reader(open("data/csv/installationsMod.csv", "r"))
 for row in installations_data:
-	cur.execute(sql, (row[1], row[0], row[6]+" "+row[7], row[4], row[2]))
+	cur.execute(sql, (row[1], row[0], row[6]+" "+row[7], row[4], row[2], 0.0, 0.0))
 
 sql = ('INSERT INTO activite (numero, nom) VALUES ' '(?, ?)')
 activite_data = csv.reader(open("data/csv/activiteMod.csv", "r"))
 for row in activite_data:
 	cur.execute(sql, (row[2], row[0], row[6]+" "+row[7], row[4], row[2]))
 
-sql = ('INSERT INTO equipement (numero, nom, adresse) VALUES ' '(?, ?, ?)')
+sql = ('INSERT INTO equipement (numero, nom, numero_installation) VALUES ' '(?, ?, ?)')
 equipement_data = csv.reader(open("data/csv/equipementsMod.csv", "r"))
 for row in equipement_data:
 	cur.execute(sql, (row[4], row[5], row[2]))
 
+sql = ('INSERT INTO equipement_activite (numero_equipement, numero_activite) VALUES ' '(?, ?)')
+for row in activite_data:
+	for raw in equipement_data:
+		cur.execute(sql, (raw[2], row[0]))
 
 
 
@@ -64,21 +61,6 @@ con.close()
 
 
 
-
-"""
-activite_data = csv.reader(open("data/csv/activite.csv", "r"))
-equipements_data = csv.reader(open("data/csv/equipements.csv", "r"))
-
-
-for row in activite_data:
-	print("[Activite] - " + row[4] + " | " + row[5] + " | " + row[1])
-
-for row in equipements_data:
-	print("[Equipements] - " + row[3] + " | " + row[5] + " | " + row[1])
-
-for row in installations_data:
-	print("[Installations] - " + row[1] + " | " + row[0] + " | " + row[2])
-"""
 
 
 
