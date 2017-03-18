@@ -54,3 +54,8 @@ try:
 
 except Exception as err:
     print("Unexpected error: {0}".format(err))
+finally:
+    con.commit()
+    cur.close()
+    curUpdate.close()
+    con.close()
