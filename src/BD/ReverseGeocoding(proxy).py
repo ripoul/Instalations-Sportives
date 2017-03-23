@@ -12,7 +12,8 @@ Bout de code permetant de, pour chaque adresse d'installation, de trouver ses co
 
 
 
-API_KEY ="ntWIq3E6VJyaoTFIRPSCa39KQJZwDgGo"
+#API_KEY ="ntWIq3E6VJyaoTFIRPSCa39KQJZwDgGo"
+API_KEY ="TOow97ALT8euMLEjnd34wajjXB6AqiYL"
 
 
 try:
@@ -32,6 +33,7 @@ try:
         urlParams = {'location': location, 'key': API_KEY, 'inFormat':'kvp', 'outFormat':'json'}
         url = "http://www.mapquestapi.com/geocoding/v1/address?" + urlencode(urlParams)
 
+        print(url)
         proxy_host = 'proxyetu.iut-nantes.univ-nantes.prive:3128'
         req = request.Request(url)
         req.set_proxy(proxy_host, 'http')

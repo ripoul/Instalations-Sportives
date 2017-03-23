@@ -27,7 +27,7 @@ sql = ('INSERT INTO installation (numero, nom, adresse, code_postal, ville, lati
 # Insert each row of data from the csv
 installations_data = csv.reader(open("data/csv/installationsMod.csv", "r"))
 for row in installations_data:
-	cur.execute(sql, (row[1], row[0], row[6]+" "+row[7], row[4], row[2], row[10], row[9]))
+	cur.execute(sql, (row[1], row[0], row[6]+" "+row[7], row[4], row[2], 0.0, 0.0))
 
 sql = ('INSERT OR IGNORE INTO activite (numero, nom) VALUES ' '(?, ?)')
 sql2 = ('SELECT * FROM activite WHERE numero IN (?)')
@@ -48,6 +48,18 @@ activite_data2 = csv.reader(open("data/csv/activiteMod.csv", "r"))
 for row in activite_data2:
 	cur.execute(sql, (row[2], row[4]))
 
+
+cur.execute("SELECT * FROM installation")
+for row in cur:
+	print(row)
+
+cur.execute("SELECT * FROM activite")
+for row in cur:
+	print(row)
+
+cur.execute("SELECT * FROM equipement")
+for row in cur:
+	print(row)
 
 cur.execute("SELECT * FROM equipement_activite")
 for row in cur:

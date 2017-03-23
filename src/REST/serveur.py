@@ -1,17 +1,27 @@
-from lib/bottle import route, run
+from lib.bottle import route, request, response, template, run
+import csv
+import http.client
+from urllib.parse import urlencode
+import json
+from urllib import request
+import sqlite3
+import sys
 
-@route('/installation')
-def hello():
-    return "Hello World!"
-    request.query.id
-
-from bottle import route, request, response, template
 @route('/installation')
 def installation():
-    sport = request.query.sport
+    ville = request.query.ville
     
-    #return template('Forum ID: {{id}} (page {{page}})', id=forum_id, page=page)
-    return sport
+    con = sqlite3.connect('test.db')
+    cur = con.cursor()
+    curUpdate = con.cursor()
 
+    cur.execute('SELECT numero, adresse, ville from installation where latitude=0 and longitude=0')
+    #return template('Forum ID: {{id}} (page {{page}})', id=forum_id, page=page)
+    return ville
+
+@route('/')
+def installation():
+        #return template('Forum ID: {{id}} (page {{page}})', id=forum_id, page=page)
+    return "welcome"
 
 run(host='localhost', port=9999, debug=True)
