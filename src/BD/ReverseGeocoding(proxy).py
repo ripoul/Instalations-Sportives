@@ -20,7 +20,7 @@ try:
     cur = con.cursor()
     curUpdate = con.cursor()
 
-    cur.execute('SELECT numero, adresse, ville from installation where lat=0 and lng=0')
+    cur.execute('SELECT numero, adresse, ville from installation where latitude=0 and longitude=0')
     for row in cur:
         
         numero=str(row[0])
@@ -44,12 +44,12 @@ try:
         # FIXME le print n'est pas très secure...
         print(jsonData['results'][0]['locations'][0]['latLng'])
 
-        lat = str(jsonData['results'][0]['locations'][0]['latLng']['lat'])
-        lng = str(jsonData['results'][0]['locations'][0]['latLng']['lng'])
+        latitude = str(jsonData['results'][0]['locations'][0]['latLng']['lat'])
+        longitude = str(jsonData['results'][0]['locations'][0]['latLng']['lng'])
         
 
-        curUpdate.execute("UPDATE installation SET lat = "+lat+" WHERE numero="+numero)
-        curUpdate.execute("UPDATE installation SET lng = "+lng+" WHERE numero="+numero)
+        curUpdate.execute("UPDATE installation SET latitude = "+latitude+" WHERE numero="+numero)
+        curUpdate.execute("UPDATE installation SET longitude = "+longitude+" WHERE numero="+numero)
 
 
 except Exception as err:
