@@ -2,7 +2,7 @@
 <html>
 <meta charset="utf-8">
 <head>
-<title>tp2</title>
+<title>Recherche</title>
 </head>
 
 <BODY>

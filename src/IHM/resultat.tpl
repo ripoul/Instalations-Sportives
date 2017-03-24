@@ -9,3 +9,8 @@
     </tr>
 %end
 </table>
+
+<form action="http://localhost:9999/" methode="GET">
+<INPUT TYPE="submit" NAME="nom" VALUE="Nouvelle recherche">
+
+</FORM>
