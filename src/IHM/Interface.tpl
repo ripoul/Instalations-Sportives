@@ -15,15 +15,22 @@ Veuillez remplir le formulaire ci-dessous pour nous contacter : <br/><br/>
 Type de sport : 
 
  <select name="sport">
-  %for row in rows:
+ 	<option value="all">all</option>
+  %for row in rows[0]:
     <option value={{row[0]}}>{{row[1]}}</option>
   %end
 </select>
 
 
 
-Ville : <input required="required" type="text" name="ville" placeholder="ville"><br/><br/>
+Ville : 
 
+<select name="ville">
+	<option value="all">all</option>
+  %for row in rows[1]:
+    <option value={{row[0]}}>{{row[0]}}</option>
+  %end
+</select>
 
 
 <INPUT TYPE="submit" NAME="nom" VALUE="Envoyer">
@@ -31,4 +38,4 @@ Ville : <input required="required" type="text" name="ville" placeholder="ville">
 </FORM>
 
 </body>
-<html>
+</html>

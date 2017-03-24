@@ -8,8 +8,7 @@ def installation():
 
 	db = sqlite3.connect('test.db')
 	c = db.cursor()
-	c.execute("SELECT i.nom, i.adresse, i.code_postal, i.ville from installation i, equipement e, equipement_activite ea, activite a where i.numero=e.numero_installation and e.numero=ea.numero_equipement and ea.numero_activite=a.numero and a.numero=\""+sport+"\" and i.ville=\""+ville+"\";")
-	#data = c.fetchall()
+	c.execute("SELECT e.nom, i.nom, i.adresse, i.code_postal, i.ville from installation i, equipement e, equipement_activite ea, activite a where i.numero=e.numero_installation and e.numero=ea.numero_equipement and ea.numero_activite=a.numero and a.numero=\""+sport+"\" and i.ville=\""+ville+"\";")
 	
 	output = template('src/IHM/resultat.tpl', rows=c)
 	c.close()
@@ -21,8 +20,12 @@ def installation():
 	c = db.cursor()
 	c.execute("SELECT numero, nom from activite order by nom asc;")
 	data = c.fetchall()
+	c.execute("SELECT DISTINCT ville from installation order by ville asc;")
+	databis = c.fetchall()
 	c.close()
-	output = template('src/IHM/Interface.tpl', rows=data)
+
+	liste = [data, databis]
+	output = template('src/IHM/Interface.tpl', rows=liste)
 	return output
 
 run(host='localhost', port=9999, debug=True)

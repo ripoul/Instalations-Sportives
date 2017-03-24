@@ -1,6 +1,6 @@
 <h1>Resultat</h1>
 <table>
-<tr><th>Nom</th><th>Adresse</th><th>CP</th><th>Ville</th></tr>
+<tr><th>Nom equipement</th><th>Nom installation</th><th>Adresse</th><th>CP</th><th>Ville</th></tr>
 %for row in rows:
     <tr>
     %for col in row:
