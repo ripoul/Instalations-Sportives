@@ -8,8 +8,17 @@ def installation():
 
 	db = sqlite3.connect('test.db')
 	c = db.cursor()
-	c.execute("SELECT e.nom, i.nom, i.adresse, i.code_postal, i.ville from installation i, equipement e, equipement_activite ea, activite a where i.numero=e.numero_installation and e.numero=ea.numero_equipement and ea.numero_activite=a.numero and a.numero=\""+sport+"\" and i.ville=\""+ville+"\";")
+
+	if(ville!="all" and sport!="all"):
+		c.execute("SELECT e.nom, i.nom, i.adresse, i.code_postal, i.ville from installation i, equipement e, equipement_activite ea, activite a where i.numero=e.numero_installation and e.numero=ea.numero_equipement and ea.numero_activite=a.numero and a.numero=\""+sport+"\" and i.ville=\""+ville+"\";")
+	if(ville=="all" and sport!="all"):
+		c.execute("SELECT e.nom, i.nom, i.adresse, i.code_postal, i.ville from installation i, equipement e, equipement_activite ea, activite a where i.numero=e.numero_installation and e.numero=ea.numero_equipement and ea.numero_activite=a.numero and a.numero=\""+sport+"\";")
+	if(ville!="all" and sport=="all"):
+		c.execute("SELECT e.nom, i.nom, i.adresse, i.code_postal, i.ville from installation i, equipement e, equipement_activite ea, activite a where i.numero=e.numero_installation and e.numero=ea.numero_equipement and ea.numero_activite=a.numero and i.ville=\""+ville+"\";")
+	if(ville=="all" and sport=="all"):
+		c.execute("SELECT e.nom, i.nom, i.adresse, i.code_postal, i.ville from installation i, equipement e, equipement_activite ea, activite a where i.numero=e.numero_installation and e.numero=ea.numero_equipement and ea.numero_activite=a.numero;")
 	
+
 	output = template('src/IHM/resultat.tpl', rows=c)
 	c.close()
 	return output
