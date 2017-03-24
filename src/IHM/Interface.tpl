@@ -15,16 +15,9 @@ Veuillez remplir le formulaire ci-dessous pour nous contacter : <br/><br/>
 Type de sport : 
 
  <select name="sport">
-  <option value="Escalade">Escalade</option>
-  <option value="Course d'orientation">Course d'orientation</option>
-  <option value="Tennis de table">Tennis de table</option>
-  <option value="Bicross (BMX)">Bicross (BMX)</option>
-  <option value="Tennis">Tennis</option>
-  <option value="Basket-Ball">Basket-Ball</option>
-  <option value="Football / Football en salle (Futsal)">Football</option>
-  <option value="Handball / Mini hand / Handball de plage">HandBall</option>
-  <option value="Musculation">Musculation</option>
-  <option value="Gymnastique Aérobic">Gymnastique Aérobic</option>  
+  %for row in rows:
+    <option value={{row[0]}}>{{row[1]}}</option>
+  %end
 </select>
 
 
@@ -33,7 +26,7 @@ Ville : <input required="required" type="text" name="ville" placeholder="ville">
 
 
 
-<INPUT TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+<INPUT TYPE="submit" NAME="nom" VALUE="Envoyer">
 
 </FORM>
 
