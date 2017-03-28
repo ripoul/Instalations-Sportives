@@ -4,4 +4,6 @@ Les donnees proviennent du site http://data.paysdelaloire.fr. On recupere les cs
 ### Reverse Géocoding : 
 On utilisise [mapquestAPI](https://developer.mapquest.com/documentation/) pour le reverse geocoding et la creation des differentes carte de l'application. voir : src/BD/ReverseGeocoding(proxy).py
 ### Serveur : 
-La partie serveur est gerer par [bottle](https://bottlepy.org/docs/dev/tutorial.html).
+La partie serveur est gerer par [bottle](https://bottlepy.org/docs/dev/tutorial.html). voir src/REST/*.py
+### IHM : 
+Les interfaces sont generées par le serveur à l'aide des tamplates. voir src/REST/*.tpl
