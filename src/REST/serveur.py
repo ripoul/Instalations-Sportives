@@ -7,8 +7,8 @@ from lib.bottle import static_file
 from urllib.parse import urlencode
 from urllib import request as req
 
-@route('/installation')
-def installation():
+@route('/recherche')
+def recherche():
 	ville = request.query.ville
 	sport = request.query.sport
 
@@ -27,12 +27,12 @@ def installation():
 	if(ville=="all" and sport=="all"):
 		c.execute("SELECT a.nom, e.nom, i.nom, i.adresse, i.code_postal, i.ville, i.latitude, i.longitude from installation i, equipement e, equipement_activite ea, activite a where i.numero=e.numero_installation and e.numero=ea.numero_equipement and ea.numero_activite=a.numero;")
 		output = template('src/IHM/resultatSP.tpl', rows=c)
-	
+
 	c.close()
 	return output
 
-@route('/installation/map')
-def installation():
+@route('/recherche/map')
+def map():
 	API_KEY ="TOow97ALT8euMLEjnd34wajjXB6AqiYL"
 
 	#https://beta.mapquestapi.com/staticmap/v5/map?key=TOow97ALT8euMLEjnd34wajjXB6AqiYL&locations=46.45391,%20-0.693988||nantes,%20france|marker-lg-D51A1A-A20000&size=600,400@2x
@@ -49,7 +49,7 @@ def installation():
 	requ.set_proxy(proxy_host, 'http')
 	response = req.urlopen(requ)
 
-	
+
 	output = open("src/IHM/img/img.jpg","wb")
 	output.write(response.read())
 	output.close()

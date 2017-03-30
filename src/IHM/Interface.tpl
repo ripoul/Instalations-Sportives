@@ -10,9 +10,9 @@
 <h1>Recherche</h1>
 Veuillez remplir le formulaire ci-dessous pour nous contacter : <br/><br/>
 
-<form action="http://localhost:9999/installation" methode="GET">
+<form action="http://localhost:9999/recherche" methode="GET">
 
-Type de sport : 
+Type de sport :
 
  <select name="sport">
  	<option value="all">all</option>
@@ -23,7 +23,7 @@ Type de sport :
 
 
 
-Ville : 
+Ville :
 
 <select name="ville">
 	<option value="all">all</option>
