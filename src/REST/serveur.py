@@ -41,8 +41,10 @@ def map():
 	ville = request.query.ref
 	print(lat)
 	print(longi)
+	urlParams = {'key': 'TOow97ALT8euMLEjnd34wajjXB6AqiYL', 'locations': lat+", "+longi+"||"+ville+", france|marker-lg-D51A1A-A20000", 'size':'600,400@2x'}
+	url = "https://beta.mapquestapi.com/staticmap/v5/map?" + urlencode(urlParams)
 
-	url="https://beta.mapquestapi.com/staticmap/v5/map?key=TOow97ALT8euMLEjnd34wajjXB6AqiYL&locations="+lat+",%20"+longi+"||"+ville+",%20france|marker-lg-D51A1A-A20000&size=600,400@2x"
+	#url="https://beta.mapquestapi.com/staticmap/v5/map?key=TOow97ALT8euMLEjnd34wajjXB6AqiYL&locations="+lat+",%20"+longi+"||"+ville+",%20france|marker-lg-D51A1A-A20000&size=600,400@2x"
 	print(url)
 	proxy_host = 'proxyetu.iut-nantes.univ-nantes.prive:3128'
 	requ = req.Request(url)
