@@ -7,7 +7,7 @@ import sqlite3
 import sys
 
 """
-Bout de code permetant de, pour chaque adresse d'installation, de trouver ses coordonees géographique et de les enregistrer dans la BD
+Bout de code permettant de, pour chaque adresse d'installation, de trouver ses coordonnées géographiques et de les enregistrer dans la BD
 """
 
 
@@ -27,13 +27,9 @@ try:
         numero=str(row[0])
         location=row[1]+" "+row[2]+" France"
 
-        print(numero)
-        print(location)
-
         urlParams = {'location': location, 'key': API_KEY, 'inFormat':'kvp', 'outFormat':'json'}
         url = "http://www.mapquestapi.com/geocoding/v1/address?" + urlencode(urlParams)
 
-        print(url)
         proxy_host = 'proxyetu.iut-nantes.univ-nantes.prive:3128'
         req = request.Request(url)
         req.set_proxy(proxy_host, 'http')
@@ -43,8 +39,6 @@ try:
         data = response.read().decode('utf8')
 
         jsonData = json.loads(data)
-        # FIXME le print n'est pas très secure...
-        print(jsonData['results'][0]['locations'][0]['latLng'])
 
         latitude = str(jsonData['results'][0]['locations'][0]['latLng']['lat'])
         longitude = str(jsonData['results'][0]['locations'][0]['latLng']['lng'])
