@@ -5,15 +5,14 @@ import json
 from urllib import request
 import sqlite3
 import sys
+import os
 
 """
 Bout de code permettant de, pour chaque adresse d'installation, de trouver ses coordonnées géographiques et de les enregistrer dans la BD
 """
 
 
-
-#API_KEY ="ntWIq3E6VJyaoTFIRPSCa39KQJZwDgGo"
-API_KEY ="TOow97ALT8euMLEjnd34wajjXB6AqiYL"
+API_KEY = os.environ['mapquestapiKEY']
 
 
 try:
